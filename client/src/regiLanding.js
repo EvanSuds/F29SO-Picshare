@@ -19,12 +19,11 @@ function RegiLanding() {
     const [regi, setisRegi] = useState('');
     const [entry, setEntry] = useState('');
     const [user, setUser] = useState('');
+    const [response, setResponse] = useState([]);
+    const [interests, setInterestList] = useState([]);
     //credintials for get, using axios
   Axios.defaults.withCredentials = true;
 
-
-    const interests = ["Animals", "Architecture", "Adventure", "Games", "Sightseeing", "Zoo", "Call of Duty", "Valorant", "Dota", "Edinburgh", "Scotland", "Outdoors", 
-    "Photography", "Cats", "Dogs", "Glasgow", "Heriot Watt" ]
 
     const history = useHistory();
 
@@ -88,7 +87,7 @@ function RegiLanding() {
     }
 
 
-    const printInterest = filteredInterest.map((item) => 
+    const printInterest =  filteredInterest.map((item) => 
      <li className="searchItemsList" > <Button className="searchItems" key={item.name} onClick={() => {addtoPicked(item)}} > + {item}</Button> </li>
         
     );
@@ -128,8 +127,32 @@ function RegiLanding() {
         })
     }
 
+
+    const getInterests = () => {
+        Axios.get('http://localhost:3001/getInterest', {
+            
+        }).then((response) => {
+            setResponse(response);
+            
+            initInterests();
+
+        })
+    }
+
+    const initInterests = () => {
+        setInterestList([]);
+        console.log(response)
+        if(typeof response.data !== 'undefined'){
+            for(var i = 0; i < response.data.length; i++){
+                setInterestList(interests => [...interests,response.data[i].InterestsName])
+            }
+        }
+        
+    }
+
 //on page loading check if cookie exist for user being logged  in
 useEffect( ()=> {
+    getInterests();
     Axios.get('http://localhost:3001/checklogin').then((response)=> {
     if(response.data.loggedIn === true){
       setUser(response.data.user[0].Username)
@@ -165,6 +188,7 @@ useEffect( ()=> {
             <div className="interests">
                 <h1 className="headings">Pick your interests</h1>
                 <input className="searchbar" type="text" placeholder="Search" onChange={(e) => {
+                getInterests();
                 setSearchTerm(e.target.value);
                 }}/>
 

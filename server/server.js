@@ -225,7 +225,8 @@ app.post('/posts', (req, res) => {
 app.post('/tags', (req, res) => {
     const tags = req.body.tags
     const id = req.body.id
-    
+    console.log(tags)
+    console.log(id)
     tags.forEach(element =>
         db.query("INSERT INTO Users.Interests (InterestsName) VALUES (?)", [element], 
         (err, result)=>{
@@ -276,6 +277,28 @@ app.post('/setInterest', (req, res) => {
     }
 });
 
+app.get('/getInterest', (req, res) => {
+    
+        db.query("SELECT InterestsName FROM Users.Interests",
+        (err, result)=>{
+            if(err) {
+                console.log("getinterest error " +err);
+            }
+            res.send(result);
+                        
+              
+            //res.send({message: "changed interest"})
+            
+            
+        
+            console.log("getinterest error " + err)
+            console.log("getinterest result " + result)
+            //res.send({message: "This user doesnt exist"})
+            
+            
+
+        });
+});
 
 app.post('/users', (req, res) => {
     const username = req.body.username
