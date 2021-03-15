@@ -87,7 +87,7 @@ function RegiLanding() {
     }
 
 
-    const printInterest =  filteredInterest.map((item) => 
+    const printInterest =  filteredInterest.slice(0,10).map((item) => 
      <li className="searchItemsList" > <Button className="searchItems" key={item.name} onClick={() => {addtoPicked(item)}} > + {item}</Button> </li>
         
     );

@@ -17,7 +17,7 @@ class Profile extends React.Component {
 constructor(props) {
   super(props);
   this.state = {
-
+    
     usersInfoArray: [], // An array to store the users information when fetched from the db
   };
 }
@@ -38,7 +38,7 @@ backdropClick = () => {
 
 
 
-// TEST COMMENT
+
 /*getUserInfo() {
     fetch('/users')// Use of the fetch API
     .then((resp) => resp.json()) //Get the JSON response
@@ -50,7 +50,7 @@ backdropClick = () => {
 }
 */
 getUserInfo() {
-
+  
   Axios.post('http://localhost:3001/users', {
             username: user
         }).then((response) => {
@@ -61,7 +61,7 @@ getUserInfo() {
           }else {
             console.log("no response")
           }
-
+          
 
         })
 }
@@ -72,11 +72,11 @@ componentDidMount() { // Runs after the first render
       user = response.data.user[0].Username
       //console.log(response.data.user[0].Username)
       this.getUserInfo(); // Fetch the users info by calling function
-
+      
     }
-
+    
     });
-
+    
 }
 
 
@@ -115,16 +115,16 @@ return (
                 <Navbar drawerClickedHandler={this.drawerToggleClick} />
                 {sideDrawer}
                 {backdrop}
-
-
+                
+                
         </div>
-
+        
     <br/>
       <div class = "userInfo">
         <div class = "square">
           <span>
             <p>
-              <img src = {info.image} alt = "Loading..." width = "100" height = "100" />
+              <img className="profileimg" src = {info.image} alt = "Loading..." width = "100" height = "100" />
               {info.fname} {info.lname}
               </p>
           </span>

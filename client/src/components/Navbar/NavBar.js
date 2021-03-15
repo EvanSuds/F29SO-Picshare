@@ -15,10 +15,10 @@ const navbar = props => (
             <div className="navbarItems">
                 <ul>
                     <li><Link to="/allNewsFeed">News Feed</Link></li>
-                    <li><a href=''>Explore</a></li>
+                    <li><Link to="/explore">Explore</Link></li>
                     <li><a href=''>Upload</a></li>
                     <div class="dropdown">
-                        <button class="dropbtn">John Doe</button>
+                        <button class="dropbtn"><Link to="/profile">John Doe</Link></button>
                         <div class="dropdown-content">
                             <a href="#">My Account</a>
                             <a href="#">Settings</a>

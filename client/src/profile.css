@@ -63,7 +63,7 @@ hr.solid2 {
   background-color: #384ad3;
   padding: 0.5em 9.375em;
 }
-img {
+.profileimg {
   border-radius: 50%;
   border: solid white 2px;
 }

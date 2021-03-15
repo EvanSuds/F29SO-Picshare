@@ -300,6 +300,30 @@ app.get('/getInterest', (req, res) => {
         });
 });
 
+
+app.get('/getUsers', (req, res) => {
+    
+    db.query("SELECT Username FROM Users.userDetails",
+    (err, result)=>{
+        if(err) {
+            console.log("getuser error " +err);
+        }
+        res.send(result);
+                    
+          
+        //res.send({message: "changed interest"})
+        
+        
+    
+        console.log("getuser error " + err)
+        console.log("getuser result " + result)
+        //res.send({message: "This user doesnt exist"})
+        
+        
+
+    });
+});
+
 app.post('/users', (req, res) => {
     const username = req.body.username
     //console.log(username)

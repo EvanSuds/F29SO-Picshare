@@ -5,11 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter , Switch, Route, Link, Redirect, withRouter, useHistory }from "react-router-dom";
 import ProtectedRoute from "./protectedRoute";
 import Profile from "./profile";
-import regiLanding from "./regiLanding";
 import isLoggedIn from "./App";
 import isRegi from "./App";
 import RegiLanding from "./regiLanding"
 import allnewsFeed from "./allNewsfeed"
+import Explore from "./explore";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,8 @@ ReactDOM.render(
       <ProtectedRoute path="/profile" component={Profile} isAuth={isLoggedIn}/>
       <ProtectedRoute path="/regiLanding" component={RegiLanding} isAuth={isRegi}/>
       <Route path="/allNewsfeed" component={allnewsFeed}/>
+      <ProtectedRoute path="/explore" component={Explore} isAuth={true}/>
+      
       
   </BrowserRouter>
   </React.StrictMode>,

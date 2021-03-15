@@ -14,6 +14,7 @@ import up from "./upA.png"
 
 
 
+
 function App(props) {
 
   
@@ -231,11 +232,10 @@ useEffect( ()=> {
 
   
  return (
-
+  
   
   <div className="App">
     <div className="regi">
-
       <h1 className="headings">Sign Up</h1>
       {/*input for registration username */}
       <input className="regiUN" type="text" placeholder="Username" onChange={(e) => {

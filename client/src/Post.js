@@ -105,7 +105,7 @@ class Post extends Component {
         <ListItem key={this.state.key}>
             <Card>
                 <CardContent>
-                <img src={this.state.file} />
+                <img className="postimg" src={this.state.file} />
                 <Typography>
                     User
                 </Typography>

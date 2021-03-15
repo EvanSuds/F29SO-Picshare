@@ -1,0 +1,93 @@
+
+
+@import url(//db.onlinewebfonts.com/c/9ae5e19516bc6428f1327ff3311b2617?family=DINNextW01-Light);
+@font-face {font-family: "DIN-Light"; src: url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.eot"); src: url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.woff") format("woff"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.svg#DINNextW01-Light") format("svg"); }
+ 
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.exploretitle{
+  position: absolute;
+  font-family: DIN-light;
+  top: 1rem;
+  left: 1rem;
+  color: #000000;
+  z-index: 10;
+  margin: 0;
+  padding: 0; 
+}
+
+.search {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+ 
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+  
+}
+
+.search input {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.Locate {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  z-index: 10;
+}
+
+.Locate img {
+  width: 50px;
+  cursor: pointer;
+}
+
+
+.list{
+  background-color: 	rgb(250,250,250, 0.6);
+}
+
+.mapresult{
+  border: none;
+  background-color: 	rgb(255, 255, 255, 0.01);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  filter: drop-shadow(0 0 0.01rem black);
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  opacity: 100%;
+ 
+}
+
+.mapresult:hover {
+  background: lightgray;
+}
+
+.searchItemsList {
+  float: center;
+}
+
+
+.searchTitles {
+  color: grey;
+}
