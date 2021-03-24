@@ -7,6 +7,27 @@ import {withRouter, useHistory, BrowserRouter , Switch, Route, Link, Redirect} f
 import PostDialog from './PostDialog';
 import Post from './Post';
 import Axios from 'axios';
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+    root: {
+      backgroundColor: "red"
+    },
+    listClass: {
+      borderStyle: 'dashed',
+      borderColor: 'red',
+
+      display:'inline-block',
+    },
+    listClass2: {
+         borderStyle: 'dashed',
+        borderColor: 'blue',
+        display:'inline-block',
+        alignItems:'center',
+     justify:'center',
+
+      }
+  });
 
 
 class Newsfeed extends Component {
@@ -15,12 +36,12 @@ class Newsfeed extends Component {
         super(props);
         this.addPost = this.addPost.bind(this);
         this.createPost = this.createPost.bind(this);
-        
+
         this.state = {
             feedItems : [],
             currentText : "",
             user : ""
-            
+
         }
     }
 
@@ -42,23 +63,22 @@ class Newsfeed extends Component {
               user : response.data.user[0].Username
           });
           console.log(response.data.user[0].Username)
-          
+
         }
-        
+
         });
-        
+
     }
 
-    
-
-
     render(){
+        const { classes } = this.props;
+
         return (
-            <Container>
+            <Container className={classes.listClass}>
             <PostDialog onPostSubmit={this.addPost}></PostDialog>
-            <List ref="feed">
+            <List ref="feed"className={classes.listClass2} >
                 {console.log("number of elements: " + this.state.feedItems.length)}
-                {this.state.feedItems.reverse().map((item) => 
+                {this.state.feedItems.reverse().map((item) =>
                 {
                 return item
                 })
@@ -69,4 +89,4 @@ class Newsfeed extends Component {
     }
 }
 
-export default withRouter(Newsfeed);
+export default withStyles(styles, { withTheme: true })(Newsfeed);

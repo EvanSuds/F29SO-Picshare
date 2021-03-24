@@ -7,9 +7,28 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import UploadButton from './UploadButton';
 import Axios from 'axios';
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+    root: {
+      backgroundColor: "red"
+    },
+    postImage: {
+
+        height: 'auto',
+        maxWidth:'36vh',
+        maxHeight:'33vw',
+        borderRadius: '0%',
+    },
+    postBox: {
+        borderStyle: 'dotted',
+        borderColor: 'red'
+
+    }
+  });
 
 var user = "";
-export default class PostDialog extends React.Component {
+class PostDialog extends React.Component {
 
     constructor(props){
         super(props);
@@ -21,7 +40,7 @@ export default class PostDialog extends React.Component {
         this.handlePost = this.handlePost.bind(this);
         this.resetState = this.resetState.bind(this);
         this.state = {
-            open : false, 
+            open : false,
             description : "",
             tags : "",
             file : null
@@ -72,24 +91,22 @@ export default class PostDialog extends React.Component {
         this.resetState();
         this.handleClose();
     }
-
-    
-    
     render () {
+        const { classes } = this.props;
         return (
-            <div>
+            <div >
             <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                 Add Post
             </Button>
-          <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
+          <Dialog  onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
             <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
               Create a new post
             </DialogTitle>
             <DialogContent dividers>
-            <UploadButton onUpload={this.handleUpload}/>
-            <img src={this.state.file} />
+            <UploadButton onUpload={this.handleUpload} />
+            <img className={classes.postImage} src={this.state.file} />
             <form noValidate autoComplete="off">
-                <TextField id="description" label="Add a description." multiline onChange={this.handleDescriptionChange}/>
+                <TextField  id="description" label="Add a description." multiline onChange={this.handleDescriptionChange}/>
                 <br></br>
                 <TextField id="tags" label="Add a few tags!" multiline onChange={this.handleTagsChange}/>
             </form>
@@ -107,3 +124,4 @@ export default class PostDialog extends React.Component {
         );
     }
 }
+export default withStyles(styles, { withTheme: true }) (PostDialog);

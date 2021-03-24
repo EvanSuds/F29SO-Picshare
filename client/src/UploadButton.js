@@ -31,14 +31,14 @@ class UploadButton extends React.Component {
     render() {
       const { classes } = this.props;
         return (
-            <div  className={classes.btnc}>
-              <input
+            <div  >
+              <input className={classes.buttonHidden}
                 accept="image/*"
                 id="contained-button-file"
                 onChange={this.handleChange}
                 type="file"
               />
-              <label htmlFor="contained-button-file">
+              <label className={classes.button1} htmlFor="contained-button-file">
                 <Button variant="contained" color="primary" component="span">
                   Add an image
                 </Button>
