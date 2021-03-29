@@ -14,14 +14,9 @@ const styles = theme => ({
       backgroundColor: "red"
     },
     listClass: {
-      borderStyle: 'dashed',
-      borderColor: 'red',
-
       display:'inline-block',
     },
     listClass2: {
-         borderStyle: 'dashed',
-        borderColor: 'blue',
         display:'inline-block',
         alignItems:'center',
      justify:'center',
@@ -45,8 +40,12 @@ class Newsfeed extends Component {
         }
     }
 
+    createPostNoAdd(description, tags, file) {
+        return <Post key={this.state.feedItems.length} description={description} tags={tags} file={file} user={this.state.user} toAdd = {false}/>;
+    }
+
     createPost(description, tags, file) {
-        return <Post key={this.state.feedItems.length} description={description} tags={tags} file={file} user={this.state.user}/>;
+        return <Post key={this.state.feedItems.length} description={description} tags={tags} file={file} user={this.state.user} toAdd = {true}/>;
     }
 
     addPost(description, tags, image) {
@@ -56,17 +55,38 @@ class Newsfeed extends Component {
         });
     }
 
+    getPosts() {
+
+      Axios.post('http://localhost:3001/allposts', {
+          }).then((response) => {
+            if(response){
+
+              console.log(response.data);
+              for(var i = 0; i < response.data.length; i++) {
+                const newPost = this.createPostNoAdd(response.data[i].PostDes,response.data[i].Username,response.data[i].Image);
+                this.setState({
+                    feedItems : this.state.feedItems.concat([newPost])
+                });
+
+            }
+            } else {
+                console.log("no response")
+                }
+              });
+    }
+
     componentDidMount() { // Runs after the first render
         Axios.get('http://localhost:3001/checklogin').then((response)=> {
         if(response.data.loggedIn === true){
           this.setState({
-              user : response.data.user[0].Username
+              user : response.data.user[0].username
           });
-          console.log(response.data.user[0].Username)
+          console.log(response.data.user[0].username)
 
         }
 
         });
+        this.getPosts();
 
     }
 
@@ -85,6 +105,8 @@ class Newsfeed extends Component {
                 }
             </List>
             </Container>
+
+
         );
     }
 }

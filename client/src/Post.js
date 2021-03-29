@@ -14,8 +14,7 @@ const styles = theme => ({
     backgroundColor: "red"
   },
   imageFileCard: {
-    borderStyle: 'dotted',
-    borderColor: 'lime'
+    
   },
   imgc12: {
     height: 'auto',
@@ -31,11 +30,22 @@ class Post extends Component {
     constructor(props) {
       super(props);
 
-      this.state = { description: props.description, key: props.key, file: props.file, tags : props.tags, user: props.user, id:0};
-      console.log("Props file: " + props.file);
+      this.state = {
+        description: props.description,
+        key: props.key,
+        file: props.file,
+        tags : props.tags,
+        user: props.user,
+        id:0,
+        toAdd: props.toAdd
+      };
     }
-    postPostInfo() {
 
+    postPostInfo() {
+      if(!this.state.toAdd) {
+        console.log("Not adding to DB");
+      }
+      else {
       Axios.post('http://localhost:3001/posts', {
                 username: this.state.user,
                 description: this.state.description,
@@ -50,7 +60,7 @@ class Post extends Component {
               }
             })
           add = false;
-
+        }
     }
 
     postPostTags() {
@@ -70,14 +80,16 @@ class Post extends Component {
     }
 
     parseTags(){
+      /*
       split = this.state.tags.split(" ")
       console.log(split)
       this.postPostTags();
+      */
 
     }
 
     componentDidMount() { // Runs after the first render
-      console.log("in component")
+      //Every time a post is created, the postPostInfo method is called
         this.postPostInfo();
     }
 
@@ -89,9 +101,6 @@ class Post extends Component {
                 <Card className={classes.imageFileCard}>
                     <CardContent>
                     <img className={classes.imgc12} src={this.state.file } />
-                    <Typography>
-                        Loser User
-                    </Typography>
                     <Typography color="textSecondary" gutterBottom>
                         {this.state.description}
                     </Typography>

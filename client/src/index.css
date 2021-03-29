@@ -2,6 +2,55 @@
 @font-face {font-family: "DIN-Light"; src: url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.eot"); src: url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.woff") format("woff"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/9ae5e19516bc6428f1327ff3311b2617.svg#DINNextW01-Light") format("svg"); }
 
 
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#testid {
+/*  border-style: dashed;
+border-color: rgb(28, 8, 119); */
+
+max-width: 100%;
+padding: 1rem;
+margin-top: 4rem;
+}
+
+.col {
+
+  padding: 1rem;
+
+}
+#newsfeedid {
+  max-width: 100%;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  padding-top: 0rem;
+  /*  border-style: dashed;
+  border-color: rgb(67, 207, 12); */
+  margin-left: 2rem;
+
+
+  margin-top: 1rem;
+}
+
+#groupCard {
+ /*  border-style: dotted;
+  border-color: rgb(221, 218, 11); */
+
+
+}
+
+
 .userInfo {
   color:black;
   font-family: DIN-light;

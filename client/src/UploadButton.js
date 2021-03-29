@@ -18,28 +18,43 @@ const styles = theme => ({
 class UploadButton extends React.Component {
 
     constructor(props){
-
         super(props);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event){
-        const file = URL.createObjectURL(event.target.files[0]);
-        this.props.onUpload(file);
-    }
+
+    handleChange (e) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.style.display = 'none';
+            input.accept = 'image/*';
+            document.body.appendChild(input);
+            input.click();
+
+            const self = this;
+
+            input.onchange = function () {
+                const image = input.files[0];
+                const reader = new FileReader();
+                reader.onload = function () {
+                    const base64 = reader.result;
+                    self.props.onUpload(base64);
+                    };
+                reader.readAsDataURL(image);
+                input.onchange = null;
+                input.remove();
+                };
+            }
 
     render() {
       const { classes } = this.props;
         return (
             <div  >
-              <input className={classes.buttonHidden}
-                accept="image/*"
-                id="contained-button-file"
-                onChange={this.handleChange}
-                type="file"
-              />
               <label className={classes.button1} htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
+                <Button variant="contained" color="primary" component="span" onClick={e => {
+                  e.stopPropagation();
+                  this.handleChange(e);
+                }}>
                   Add an image
                 </Button>
               </label>

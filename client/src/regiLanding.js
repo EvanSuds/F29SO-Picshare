@@ -129,13 +129,10 @@ function RegiLanding() {
 
 
     const getInterests = () => {
-        Axios.get('http://localhost:3001/getInterest', {
-
+        Axios.get('http://localhost:3001/getInterests', {
         }).then((response) => {
             setResponse(response);
-
             initInterests();
-
         })
     }
 
@@ -144,7 +141,7 @@ function RegiLanding() {
         console.log(response)
         if(typeof response.data !== 'undefined'){
             for(var i = 0; i < response.data.length; i++){
-                setInterestList(interests => [...interests,response.data[i].InterestsName])
+                setInterestList(interests => [...interests,response.data[i].interestName])
             }
         }
 
@@ -155,7 +152,7 @@ useEffect( ()=> {
     getInterests();
     Axios.get('http://localhost:3001/checklogin').then((response)=> {
     if(response.data.loggedIn === true){
-      setUser(response.data.user[0].Username)
+      setUser(response.data.user[0].username)
       //setStatus(response.data.user[0].Username);
       //setisLoggedIn(true);
 
@@ -210,7 +207,6 @@ useEffect( ()=> {
                 <br></br>
                 <Button className="button" onClick={checkAgreement} >Continue</Button>
                 <p className="headings">{feedbackStatus}</p>
-                <p>{user}</p>
             </div>
         </div>
     )

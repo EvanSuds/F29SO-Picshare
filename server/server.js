@@ -220,7 +220,7 @@ app.post('/setInterest', (req, res) => {
 
     for(i = 0; i < interests.length; i++){
       console.log(interests[i]);
-      console.log(username);
+      console.log("Your username is " + username);
         db.query("INSERT INTO profile.userinterests (InterestID, UserID) VALUES ((SELECT InterestID FROM profile.Interests WHERE interestName=?),(SELECT userID FROM profile.userdetails WHERE username=?));", [interests[i], username],
         (err, result)=>{
             if(err) {
@@ -232,6 +232,28 @@ app.post('/setInterest', (req, res) => {
     }
 });
 
+app.get('/getInterests', (req, res) => {
+
+        db.query("SELECT interestName FROM profile.interests",
+        (err, result)=>{
+            if(err) {
+                console.log("getinterest error " +err);
+            }
+            res.send(result);
+
+
+            //res.send({message: "changed interest"})
+
+
+
+            console.log("getinterest error " + err)
+            console.log("getinterest result " + result)
+            //res.send({message: "This user doesnt exist"})
+
+
+
+        });
+});
 
 app.post('/users', (req, res) => {
     const username = req.body.username
@@ -284,6 +306,13 @@ app.post('/users', (req, res) => {
   app.post('/myposts',(req,res) => {
     const username = req.body.username
     db.query("SELECT * FROM profile.posts WHERE Username=? ORDER BY PostID DESC LIMIT 10", [username], (err, result) =>{
+      if (err) throw err;
+      res.send(result);
+      });
+  });
+
+  app.post('/allposts',(req,res) => {
+    db.query("SELECT * FROM profile.posts",(err,result) =>{
       if (err) throw err;
       res.send(result);
       });
@@ -344,6 +373,19 @@ app.post('/follow', (req, res) => {
         }
     );
 });
+
+app.post('/sendGeoData', (req, res) => {
+    const lat = req.body.lat;
+    const long = req.body.long;
+    db.query('insert into profile.posts (Lat, Long) VALUES (?, ?)',
+        [lat, long],
+        (err, result) => {
+            if (err) throw err;
+            res.send(result);
+        }
+    );
+});
+
 
 {/*log server is running*/}
 app.listen(3001, () =>{
