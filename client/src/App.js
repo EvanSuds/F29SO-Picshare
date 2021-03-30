@@ -236,7 +236,7 @@ useEffect( ()=> {
 
   <div className="App">
     <div className="regi">
-      <h1 className="headings">Picshare is a social media webpage with an emphasis on gaming.
+      <h1 className="headings">Picshare is a social media webpage with an emphasis on hobbies and interests.
         Earn points and top the leaderboards and explore topics of your choosing and follow people with similar interests.</h1>
     <br/>
       <h1 className="headings">Sign Up</h1>

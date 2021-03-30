@@ -392,7 +392,15 @@ app.post('/follow', (req, res) => {
     );
 });
 
-
+app.get('/getGeoData', (req, res) => {
+    const id = req.query.userId;
+    db.query('select latitude,longitude from profile.posts',
+        (err, result) => {
+            if (err) throw err;
+            res.send(result);
+        }
+    );
+});
 
 {/*log server is running*/}
 app.listen(3001, () =>{

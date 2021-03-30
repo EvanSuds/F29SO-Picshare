@@ -32,9 +32,6 @@ const options = {
 
 export default function Explore() {
 
-
-
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyAhlnlgHa_2GfJVSbupAcK_aIMxlc7DSoI", // api key stored in .env.local file
     libraries,
@@ -44,7 +41,7 @@ export default function Explore() {
   const [selected, setSelected] = React.useState(null);
   const [sideDrawer, setSideDrawer] = React.useState(null);
   const [backDrop, setBackDrop] = React.useState(null);
-
+  var locations = [{ lat: 55.909549, long: -3.318807 }, { lat: 56, long: -3.318807 },{lat: 55.945775899999994, long: -3.2217655}];
 
   const [sideDrawerOpen, setSideDrawerOpen] = React.useState(false)
 
@@ -59,10 +56,28 @@ export default function Explore() {
   };
 
 
+  const onMapLoad = React.useCallback((map) => {
+        mapRef.current = map;
 
+        Axios.get('http://localhost:3001/getGeoData')
+        .then(res => {
+            const newLocation = {
+                lat: parseFloat(res.data[2].latitude),
+                long: parseFloat(res.data[2].longitude)
+            };
+            console.log(newLocation);
+            locations.push(newLocation);
+            console.log(locations);
+            /*
+            lat: 55.945775899999994
+            long: -3.2217655
+            */
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
-
-
+    }, []);
 
   const onMapClick = React.useCallback((event) => { // setting event on click of map
     setMarkers(current => [...current, {
@@ -73,9 +88,6 @@ export default function Explore() {
   }, []); // stores events in array
 
   const mapRef = React.useRef(); //keeping track of reference to map so we can pan
-  const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map;
-  }, []);
 
   const panTo = React.useCallback(({lat,lng}) => {  //panning function that takes lat+lng of search selection and pans map to it
     mapRef.current.panTo({lat,lng});
@@ -111,38 +123,28 @@ export default function Explore() {
     <Locate panTo={panTo} />
 
     <GoogleMap //map info
+      onLoad={onMapLoad}
       mapContainerStyle={mapContainerStyle}
       zoom={15}
       center={center}
       options={options}
-      onClick={onMapClick}
-      onLoad={onMapLoad}
     >
-      {markers.map((marker) => (
-        <Marker //marker info
-          key={marker.time.toISOString()}
-          position={{ lat: marker.lat, lng: marker.lng }}
-          onClick={() => {
-            setSelected(marker);
-          }}
-        />
-      ))}
+    {
 
-      {selected ? (
-        <InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
-          onCloseClick={() => {
-            setSelected(null);
-          }}
-        >
-          <div>
-            <h2>Example</h2>
-            <p>Added {formatRelative(selected.time, new Date())}</p>
-          </div>
-        </InfoWindow>) : null}
+      locations.map(item =>(
 
+        <Marker
+              position={{ lat: item.lat, lng: item.long }}
 
-    </GoogleMap>
+              onClick={() => {
+                  window.alert(item.lat + " " + item.long);
+              }}
+          >
+          </Marker>
+              ))
+              }
+
+          </GoogleMap>
   </div>
   );
 }

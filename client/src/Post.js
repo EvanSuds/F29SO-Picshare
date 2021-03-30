@@ -150,7 +150,7 @@ class Post extends Component {
                     </Typography>
                     <br></br>
                     <Typography color="textSecondary" gutterBottom>
-                        {this.state.tags}
+                        Uploaded by: {this.state.tags}
                     </Typography>
                     </CardContent>
                 </Card>
