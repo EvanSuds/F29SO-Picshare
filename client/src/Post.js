@@ -43,12 +43,16 @@ class Post extends Component {
       };
     }
 
-    postPostInfo() {
-      this.processFile(this.state.file);
+    async postPostInfo() {
+
       if(!this.state.toAdd) {
         console.log("Not adding to DB");
       }
       else {
+        lat = "";
+        long = "";
+        this.processFile(this.state.file);
+        await this.timeout(1000);
       console.log(lat);
       console.log(long);
       Axios.post('http://localhost:3001/posts', {
@@ -76,6 +80,8 @@ class Post extends Component {
                     console.log("no response")
                   }
                 })
+
+
         }
     }
 
@@ -88,11 +94,8 @@ class Post extends Component {
         // original image loaded, extract thumb
         try {
             let { latitude, longitude } = await exifr.gps(url);
-            console.log(longitude);
-            console.log(latitude);
             lat = latitude;
             long = longitude;
-
         }
         catch{
             console.log("No EXIF Data");
@@ -120,13 +123,18 @@ class Post extends Component {
       split = this.state.tags.split(" ")
       console.log(split)
       this.postPostTags();
-
-
     }
 
-    componentDidMount() { // Runs after the first render
+   timeout(delay: number) {
+      return new Promise( res => setTimeout(res, delay) );
+    }
+
+
+     componentDidMount() { // Runs after the first render
       //Every time a post is created, the postPostInfo method is called
+
         this.postPostInfo();
+
     }
 
     render() {
