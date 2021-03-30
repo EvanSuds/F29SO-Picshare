@@ -11,7 +11,7 @@ const app = express()
 
 
 app.use(express.json({
-  limit: '10mb'
+  limit: '30mb'
 }));
 
 {/*connection to front end*/}
@@ -176,9 +176,10 @@ app.post('/posts', (req, res) => {
     const username = req.body.username
     const description = req.body.description
     const img = req.body.img
+    const lat = req.body.latitude
+    const long = req.body.longitude
 
-
-    db.query("INSERT INTO profile.Posts (Username, Image, PostDes) VALUES (?,?,?)", [username, img, description],
+    db.query("INSERT INTO profile.Posts (Username, Image, PostDes,Latitude,Longitude) VALUES (?,?,?,?,?)", [username, img, description,lat,long],
     (err, result)=>{
         if(err) {
             console.log("setdetails error " +err);
@@ -254,19 +255,22 @@ app.get('/getInterests', (req, res) => {
                 console.log("getinterest error " +err);
             }
             res.send(result);
-
-
-            //res.send({message: "changed interest"})
-
-
-
             console.log("getinterest error " + err)
             console.log("getinterest result " + result)
-            //res.send({message: "This user doesnt exist"})
-
-
-
         });
+});
+
+app.get('/getUsers', (req, res) => {
+
+    db.query("SELECT username FROM profile.userdetails",
+    (err, result)=>{
+        if(err) {
+            console.log("getuser error " +err);
+        }
+        res.send(result);
+        console.log("getuser error " + err)
+        console.log("getuser result " + result)
+    });
 });
 
 app.post('/users', (req, res) => {
@@ -388,17 +392,6 @@ app.post('/follow', (req, res) => {
     );
 });
 
-app.post('/sendGeoData', (req, res) => {
-    const lat = req.body.lat;
-    const long = req.body.long;
-    db.query('insert into profile.posts (Lat, Long) VALUES (?, ?)',
-        [lat, long],
-        (err, result) => {
-            if (err) throw err;
-            res.send(result);
-        }
-    );
-});
 
 
 {/*log server is running*/}

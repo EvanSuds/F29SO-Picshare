@@ -9,6 +9,7 @@ import Post from './Post';
 import Axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
 
+
 const styles = theme => ({
     root: {
       backgroundColor: "red"
@@ -63,7 +64,7 @@ class Newsfeed extends Component {
 
               console.log(response.data);
               for(var i = 0; i < response.data.length; i++) {
-                const newPost = this.createPostNoAdd(response.data[i].PostDes,response.data[i].Username,response.data[i].Image);
+                const newPost = this.createPostNoAdd(response.data[i].PostDes,response.data[i].Username,response.data[i].Image,response.data[i].latitude,response.data[i].longitude);
                 this.setState({
                     feedItems : this.state.feedItems.concat([newPost])
                 });

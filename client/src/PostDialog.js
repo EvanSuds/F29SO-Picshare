@@ -8,7 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import UploadButton from './UploadButton';
 import Axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
-import exifr from 'exifr';
+
+
 
 
 const styles = theme => ({
@@ -45,7 +46,9 @@ class PostDialog extends React.Component {
             open : false,
             description : "",
             tags : "",
-            file : null
+            file : null,
+            lat: "",
+            long: ""
         };
     }
 
@@ -90,40 +93,11 @@ class PostDialog extends React.Component {
     handlePost(){
         this.props.onPostSubmit(this.state.description, this.state.tags, this.state.file);
         console.log("File: " + this.state.file);
-        this.processFile(this.state.file);
         this.resetState();
         this.handleClose();
     }
 
-    async processFile(arg) {
-        let url;
-        if (arg instanceof Blob)
-            url = URL.createObjectURL(arg);
-        else
-            url = arg;
-        // original image loaded, extract thumb
-        try {
-            let { latitude, longitude } = await exifr.gps(url);
-            console.log(longitude);
-            console.log(latitude);
 
-            Axios.post('http://localhost:3001/posts', {
-                postLong: longitude,
-                postLat: latitude
-            }).then((response) => {
-                if (response) {
-                } else {
-                    console.log("no response")
-                }
-
-
-            })
-        }
-        catch{
-            console.log("No EXIF Data");
-        }
-
-    }
 
     render () {
         const { classes } = this.props;

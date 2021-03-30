@@ -257,7 +257,7 @@ return (
           cursor: 'pointer',
           height: '300px',
           backgroundSize: '100% 100%',
-          backgroundImage: info.backgroundImage ? `url(${info.backgroundImage})` : 'url("https://tomaszjanickiphoto.co.uk/wp-content/gallery/scotland/DSC_8286.jpg")'
+          backgroundImage: info.backgroundImage ? `url(${info.backgroundImage})` : 'url("https://www.nationalflags.shop/WebRoot/vilkasfi01/Shops/2014080403/53F0/F886/BB3A/522C/CB5B/0A28/100A/2578/blue_rectangle.jpg")'
           }}
           onClick={(e) => {
               this.handleUploadImage(e, info, i, false);
@@ -267,7 +267,7 @@ return (
             <p>
               <img
                 src = {info.image}
-                alt = 'No Image set'
+                alt = 'No Image'
                 style={{ width: '80px', height: '80px', display: 'inline-block', margin: '10px', fontSize: '14px', lineHeight: '80px', textAlign: 'center', cursor: 'pointer' }}
                 onClick={e => {
                   e.stopPropagation();

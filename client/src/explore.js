@@ -188,7 +188,7 @@ function Search({panTo}) {
 
 
   const getInterests = () => {
-    Axios.get('http://localhost:3001/getInterest', {
+    Axios.get('http://localhost:3001/getInterests', {
 
     }).then((response) => {
         setResponse(response);
@@ -205,7 +205,7 @@ function Search({panTo}) {
     console.log(response)
     if(typeof response.data !== 'undefined'){
         for(var i = 0; i < response.data.length; i++){
-            setInterestList(interests => [...interests,response.data[i].InterestsName])
+            setInterestList(interests => [...interests,response.data[i].interestName])
         }
     }
 
@@ -245,7 +245,7 @@ function Search({panTo}) {
     console.log(Userresponse)
     if(typeof Userresponse.data !== 'undefined'){
         for(var i = 0; i < Userresponse.data.length; i++){
-            setUserList(users => [...users,Userresponse.data[i].Username])
+            setUserList(users => [...users,Userresponse.data[i].username])
         }
     }
 

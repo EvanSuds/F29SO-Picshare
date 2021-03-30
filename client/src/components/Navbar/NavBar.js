@@ -16,11 +16,11 @@ const navbar = props => (
                 <ul>
                     <li><Link to="/allNewsFeed">News Feed</Link></li>
                     <li><Link to="/explore">Explore</Link></li>
-                    <li><a href=''>Upload</a></li>
+                    <li><Link to="/profile">My Profile</Link></li>
                     <div class="dropdown">
-                        <button class="dropbtn"><Link to="/profile">John Doe</Link></button>
+                        <button class="dropbtn"><Link to="/profile">More Options</Link></button>
                         <div class="dropdown-content">
-                            <a href="/profile">My Account</a>
+                            <a href="/">Logout</a>
                             <a href="#">Settings</a>
                             <a href="#">Privacy Policy</a>
                         </div>

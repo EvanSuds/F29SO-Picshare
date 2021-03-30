@@ -5,10 +5,12 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import CardContent from '@material-ui/core/CardContent';
 import Axios from 'axios';
+import exifr from 'exifr';
 
 var split = [];
 var add = true;
-
+var lat = "";
+var long = "";
 const styles = theme => ({
   root: {
     backgroundColor: "red"
@@ -42,14 +44,19 @@ class Post extends Component {
     }
 
     postPostInfo() {
+      this.processFile(this.state.file);
       if(!this.state.toAdd) {
         console.log("Not adding to DB");
       }
       else {
+      console.log(lat);
+      console.log(long);
       Axios.post('http://localhost:3001/posts', {
                 username: this.state.user,
                 description: this.state.description,
-                img: this.state.file
+                img: this.state.file,
+                latitude: lat,
+                longitude: long
             }).then((response) => {
               if(response){
                 console.log(response)
@@ -72,6 +79,26 @@ class Post extends Component {
         }
     }
 
+    async processFile(arg) {
+        let url;
+        if (arg instanceof Blob)
+            url = URL.createObjectURL(arg);
+        else
+            url = arg;
+        // original image loaded, extract thumb
+        try {
+            let { latitude, longitude } = await exifr.gps(url);
+            console.log(longitude);
+            console.log(latitude);
+            lat = latitude;
+            long = longitude;
+
+        }
+        catch{
+            console.log("No EXIF Data");
+        }
+
+    }
     postPostTags() {
       console.log("intags")
       console.log(this.state.id)

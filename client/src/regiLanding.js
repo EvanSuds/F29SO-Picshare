@@ -168,12 +168,12 @@ useEffect( ()=> {
         <div className="regiLanding">
             <div className="basic">
                 <h1 className="headings">Set up  your profile</h1>
-                <input className="displayName" type="text" placeholder="Display Name" onChange={(e) => {
+                <input className="displayName" type="text" placeholder="Your name" onChange={(e) => {
                 checkDisplayName()
                 setDisplayName(e.target.value);
                 }}/>
 
-                <textarea className="description" type="text" placeholder="Description " onChange={(e) => {
+              <textarea className="description" type="text" placeholder="Say a little bit about yourself... " onChange={(e) => {
                     setDescription(e.target.value);
                 }}/>
             </div>
