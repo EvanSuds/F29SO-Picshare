@@ -189,6 +189,20 @@ app.post('/posts', (req, res) => {
     });
 });
 
+app.post('/updateScore', (req, res) => {
+    const username = req.body.username
+
+
+    db.query("UPDATE profile.profile SET points = points + 50 WHERE username = ?", [username],
+    (err, result)=>{
+        if(err) {
+            console.log("updateScore error " +err);
+        }
+        res.send(result)
+        console.log("updateScore2 error " + err)
+        console.log(result)
+    });
+});
 
 app.post('/tags', (req, res) => {
     const tags = req.body.tags

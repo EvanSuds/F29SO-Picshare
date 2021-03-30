@@ -248,14 +248,14 @@ useEffect( ()=> {
         setEmailReg(e.target.value);
       }}/>
       {/*input for registration password */}
-      <input className="regiP" type="text" onFocus={ () => setPasswordFocus(true)} onBlur={ () => setPasswordFocus(false)} placeholder="Password" onChange={(e) => {
+      <input className="regiP" type="password" onFocus={ () => setPasswordFocus(true)} onBlur={ () => setPasswordFocus(false)} placeholder="Password" onChange={(e) => {
 
         setPasswordReg(e.target.value);
         checkValidity(e.target.value);
       }} />
 
       {/*input for registration confirmation password */}
-      <input className="conRegiP" type="text" placeholder="Confirm password" onChange={(e) => {
+      <input className="conRegiP" type="password" placeholder="Confirm password" onChange={(e) => {
         setConPasswordReg(e.target.value);
       }} />
 
@@ -295,7 +295,7 @@ useEffect( ()=> {
         setUsernameEmail(e.target.value);
       }} />
       {/*input for login password */}
-      <input className="logP" type="text" placeholder="Password" onChange={(e) => {
+      <input className="logP" type="password" placeholder="Password" onChange={(e) => {
         setPassword(e.target.value);
       }}/>
       <Button className="button" onClick={ login }>Login</Button>

@@ -274,7 +274,7 @@ return (
                   this.handleUploadImage(e, info, i, true);
                 }}
                 />
-              {info.fname} {info.lname}
+              {info.fname} {info.lname} (@{Username})
                 <span>
                 <br/>
                     I have

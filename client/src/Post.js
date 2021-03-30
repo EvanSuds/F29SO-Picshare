@@ -14,7 +14,7 @@ const styles = theme => ({
     backgroundColor: "red"
   },
   imageFileCard: {
-    
+
   },
   imgc12: {
     height: 'auto',
@@ -60,6 +60,15 @@ class Post extends Component {
               }
             })
           add = false;
+          Axios.post('http://localhost:3001/updateScore', {
+                    username: this.state.user
+                }).then((response) => {
+                  if(response){
+                    console.log(response)
+                  }else {
+                    console.log("no response")
+                  }
+                })
         }
     }
 
@@ -80,11 +89,11 @@ class Post extends Component {
     }
 
     parseTags(){
-      /*
+
       split = this.state.tags.split(" ")
       console.log(split)
       this.postPostTags();
-      */
+
 
     }
 
